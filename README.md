@@ -1,4 +1,3 @@
-# Dropout-Prediction
 # 🎓 Student Dropout Prediction
 
 Predicting which online learners are likely to **withdraw from a course**, so instructors can step in before it's too late.
@@ -56,3 +55,29 @@ The project uses the [Open University Learning Analytics Dataset (OULAD)](https:
 3. **EDA and preprocessing.** Log-transform the skewed features, winsorize outliers, drop features that are highly correlated with each other (|r| > 0.8), one-hot encode the categoricals, and standardize.
 4. **Modeling.** Start with a Logistic Regression baseline, add class-weight tuning, then compare against Random Forest and XGBoost.
 5. **Evaluation.** Precision/recall tables across thresholds, ROC curves, cross-validation, and false-negative error analysis.
+
+## 💡 Key Insights
+
+- **Engagement is the strongest signal.** How late a student is still active and submitting work correlates with dropout at about −0.58. *Recommendation:* send automated alerts when a student goes inactive for a long stretch.
+- **Academic performance matters.** Lower average scores mean higher withdrawal risk. *Recommendation:* offer targeted academic support when a student's grades start to slip.
+- **Blind spot.** The students the model misses (false negatives) look academically healthy and stay active late into the course. Their withdrawals are probably driven by factors outside the data, such as personal, financial, or work reasons.
+
+## ⚠️ Limitations & Next Steps
+
+- Features like `last_activity_day` summarize the *whole* course. A real early-warning system should only use data available up to a cut-off week (for example, the first 4–8 weeks).
+- Students enrolled in several modules are aggregated across all of them. Modeling each student-module pair separately would be more precise.
+- Next steps: SHAP explanations, hyperparameter search, and a small dashboard that surfaces at-risk students.
+
+## 🚀 Run It
+
+```bash
+git clone https://github.com/NHDungxNo1/Dropout-Prediction.git
+cd Dropout-Prediction
+pip install pandas numpy matplotlib seaborn scikit-learn scipy xgboost jupyter
+# put the OULAD CSVs in ./dataset/
+jupyter notebook DROP_OUT_PRED.ipynb
+```
+
+## 👤 Author
+
+**Dung Ngo** · [GitHub @NHDungxNo1](https://github.com/NHDungxNo1)
